@@ -7,7 +7,13 @@ let headers = new Headers()
 headers.append("Content-Type", "application/json")
 headers.append("Accept", "application/json")
 
-let requestBody = { query: "{ hello }" }
+let requestBody = { query: `
+{
+  hello
+  random
+  roll
+}
+` }
 
 let options = {
   method: "POST",
