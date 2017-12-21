@@ -2,23 +2,24 @@ let express = require("express")
 let gqlHttp = require("express-graphql")
 let { buildSchema } = require("graphql")
 
+let app = express()
+
 let schema = buildSchema(`
   type Query {
     hello: String
     random: Float!
-    roll: [Int]
+    roll(n: Int!, scale: Int!): [Int]
   }
 `)
 
-let random = () => Math.random()
+let arrayOfSize = (n) => Array.from(Array(n).keys())
 
-let root = {
-  hello: () => "hello world",
-  random,
-  roll: () => Array.from(Array(1).keys()).map(random).map(n => n * 100).map(Math.floor)
-}
+let roll = ({ n, scale }) => arrayOfSize(n)
+                      .map(Math.random)
+                      .map(num => num * scale)
+                      .map(Math.floor)
 
-let app = express()
+let root = { hello: () => "hello", random: () => Math.random(), roll }
 
 app.use("/graphql", gqlHttp({
   schema: schema,
@@ -27,4 +28,4 @@ app.use("/graphql", gqlHttp({
 }))
 
 app.listen(process.env.PORT, process.env.IP)
-console.log("up")
+console.log("server is up")
