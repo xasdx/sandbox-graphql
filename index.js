@@ -1,4 +1,6 @@
-let { graphql, buildSchema } = require("graphql")
+let express = require("express")
+let gqlHttp = require("express-graphql")
+let { buildSchema } = require("graphql")
 
 let schema = buildSchema(`
   type Query {
@@ -10,4 +12,13 @@ let root = {
   hello: () => "hello world"
 }
 
-graphql(schema, "{ hello }", root).then(console.log)
+let app = express()
+
+app.use("/graphql", gqlHttp({
+  schema: schema,
+  rootValue: root,
+  graphiql: true
+}))
+
+app.listen(process.env.PORT, process.env.IP)
+console.log("up")
