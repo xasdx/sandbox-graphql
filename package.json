@@ -1,0 +1,8 @@
+{
+  "name": "sandbox-graphql",
+  "version": "1.0.0",
+  "scripts": {},
+  "dependencies": {
+    "graphql": "^0.12.3"
+  }
+}
