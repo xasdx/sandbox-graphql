@@ -1,7 +1,9 @@
 {
   "name": "sandbox-graphql",
   "version": "1.0.0",
-  "scripts": {},
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "graphql": "^0.12.3"
   }
