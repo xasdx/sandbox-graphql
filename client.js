@@ -7,13 +7,16 @@ let headers = new Headers()
 headers.append("Content-Type", "application/json")
 headers.append("Accept", "application/json")
 
-let query = `query Roll($num: Int!, $scale: Int!) {
-  roll(n: $num, scale: $scale)
+let query = `
+{
+  roll(scale: 1000) {
+    roll(n: 5)
+  }
 }`
 
 let options = {
   method: "POST",
-  body: JSON.stringify({ query, variables: { num: 5, scale: 100 }}),
+  body: JSON.stringify({ query }),
   headers
 }
 
